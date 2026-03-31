@@ -20,7 +20,7 @@ const port=process.env.PORT || 5000
 app.use(express.json()) // Middleware to print data properly
 app.use(cookieParser()) 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://generatewebsite-3.onrender.com",
     credentials: true
 }))
 app.use("/api/auth", authRouter)
