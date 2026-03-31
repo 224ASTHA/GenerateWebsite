@@ -1,0 +1,48 @@
+import mongoose, {Schema} from "mongoose";
+
+const messageSchema = new mongoose.Schema({
+    role: {
+        type: String,
+        enum: ["ai", "user"],
+        required: true
+    },
+    content: {
+        type: String,
+        required: true
+    }
+})
+
+const websiteSchema = new mongoose.Schema({
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+    title: {
+        type: String,
+        default: "Untiteld Website"
+    },
+    latestCode: {
+        type: String,
+        required: true
+    },
+    conversation: [
+        messageSchema
+    ],
+    deployed: {
+        type: Boolean,
+        default: false
+    },
+    deployUrl: {
+        type: String
+    },
+    slug: {
+        // Use to uniquely identify the our website
+        type: String,
+        unique: true,
+        sparse: true
+    }
+}, {timestamps: true})
+
+const website = mongoose.model("Website", websiteSchema)
+export default website
